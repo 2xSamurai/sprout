@@ -16,10 +16,12 @@ const WINDOW_WIDTH = width;
 * @param {Function} onSlideChange - function that fires when slide has changed
 **/
 
+//forwardRef((props, ref) - to expose child's method to parent
+
 const Slider = forwardRef((props, ref) => {
     const slideWidth = props.slideWidth ? props.slideWidth : WINDOW_WIDTH;
     const flatListRef = useRef(null);
-    console.log('flatListRef:', flatListRef.current)
+    //useImperativeHandle to expose child's method to parent
     useImperativeHandle(ref, () => ({
         slideTo (index) {
             flatListRef.current.scrollToIndex({ animated: true, index });

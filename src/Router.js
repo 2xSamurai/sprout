@@ -22,8 +22,6 @@ const Stack = createStackNavigator();
 
 function MainNavigator() {
     const oboardingData = useSelector((state) => state?.app?.onboarding);
-    console.log('oboardingData', oboardingData)
-
     return (
         <NavigationContainer>
             <Stack.Navigator

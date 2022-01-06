@@ -16,7 +16,6 @@ import Router from './src/Router';
 
 
 const App = () => {
-  console.log(store);
   // useEffect(() => {
   //   RNBootSplash.hide({ fade: true })
   // }, []);

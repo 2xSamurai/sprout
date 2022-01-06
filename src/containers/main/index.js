@@ -6,11 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {setOnboarding} from '../../redux/app/operations';
 
 const Main = () => {
-
     const dispatch = useDispatch();
-    const oboardingData = useSelector((state) => state?.app?.onboarding);
-    console.log(oboardingData)
-    
     return (
         <SafeAreaView style={{flex: 1}}>
             <Text>Maio</Text>
