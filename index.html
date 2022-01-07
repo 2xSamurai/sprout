@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprout</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/main.js"></script>
+
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="container">
+        <h1>Collection of React Native Components</h1>
+        <p>No, this is not an npm package and wont be made into one anytime soon.</p>
+        <p>Most of the time when using an npm package I found myself only using a small part of it and not the whole
+            thing.
+            So why not make a collection where you can just copy paste the things you want and configure it to your
+            needs. This will keep your code clean.
+        </p>
+        <p>
+            Also you wont have to worry about useless stuff while updating your codebase.
+        </p>
+        <p>
+            <b>PS: This is not for the seasoned developer. But for the ones starting out.</b>
+        </p>
+
+        <h2>
+            Onboarding Component
+        </h2>
+        <p>Highlights of the component</p>
+        <ol>
+            <li>Custom Slider using FlatList</li>
+            <li>Skip Button</li>
+            <li>Next Button</li>
+            <li>Custom Components for each slide</li>
+            <li>Redux State</li>
+        </ol>
+
+        <blockquote>
+            Component names in quotes are the actual names used in the project for ease of locating them <br>
+            <b>TIP: </b>Press  <b>cmd + p</b>(on Mac) or <b>cntrl + p</b>(on Windows) to bring up quick search option if you are using <b>VSCode</b>. Input the filename and locate them easily.
+        </blockquote>
+
+        <h3>Custom Slider using FlatList</h3>
+        <p>
+            Onboarding screen uses a "Slider.js" component for the sliding functinality. Under the hood the the "Slider.js" component uses a simple FlatList. If needed you can further extend the functinalities of FlatList.
+        </p>
+
+        <h3>Skip Button</h3>
+        <p>Simple set the status of onboarding state in redux to false. Thereby hiding the onboarding screens.</p>
+        <b>Learn to set up a basic Redux implementation <a href="./redux.html">here</a></b>
+
+
+        <h3>Next Button</h3>
+        <p>
+            Uses the Flatlist's built-in scrollToIndex functionlity to slide to the next slide. Inside "Slider.js" is a scrollTo function which handles the logic.
+        </p>
+
+        <h3>Custom Components for each slide</h3>
+
+        <p>
+            Open "index.js" inside the onboarding folder. The number of slides to show is defined in this file. 
+        </p>
+
+        <pre><code>const onboardingItems = [
+        { id: 1, component: &lt;StepOne /&gt; },
+        { id: 2, component: &lt;StepTwo /&gt;  },
+        { id: 3, component: &lt;StepThree /&gt;  },
+    ]
+</code></pre>
+    <p>
+        StepOne, StepTwo and StepThree are different componets used as slides for onboarding. In this template the header and footer are static though.
+    </p>
+    </div>
+    <footer>
+
+    </footer>
+</body>
+
+</html>

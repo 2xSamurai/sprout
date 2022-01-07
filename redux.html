@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redux</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Basic Setup for Redux</h1>
+        <p>
+            Walkthorugh for setting up a basic Redux implementation in your project. Start by installing theese packages
+            "react-redux", "redux", "redux-thunk".
+            <code>
+                npm install react-redux redux redux-thunk
+            </code>
+            or if you are using <b>yarn</b> then <br>
+            <code>
+                yarn add react-redux redux redux-thunk 
+            </code>
+            <p>
+                <b>Step 1:</b> Copy <b>folder</b> "redux" into your project. Inside your "App.js" (the main file of your application), import "store.js" and { Provider } from 'react-redux'
+            </p>
+            <p>
+                We must wrap our whole application with the "Provider" tag and pass a "store" to it. This "store" holds the whole state tree of your application. It is just an object that has a few methods on it.
+                
+                We wrap the root component with Provider to make the store available to all the child components.
+
+            </p>
+            <blockquote>
+                We usually set this up once and just copy and paste the whole reducer part to the new project and modify the initial state. This is just to understand how everything works. No need to dig deep here for now. If you are curious to know more, head over to the official <a href="https://redux.js.org/api/api-reference">Redux Documentation</a> 
+            </blockquote>
+            <p>
+               <b>Step 2:</b> Now open "reducer.js" inside 'redux > app > reducer'.
+            </p>
+            <p>
+                This is our app's primary reducer(nothing but a global state). Inside it we have an onboarding object to manage everything related to onboarding.
+            </p>
+            <p>
+               <b>Our initial redux state has an onboarding object like below</b>
+            </p>
+        <pre><code>onboarding: {
+    step: 1, //This would be the current slide
+    status: true, // Whether onboarding is shwon or not
+    total: '', // Total number of slides
+}</code></pre>
+        </p>
+        <p>
+            <b>On a side note:</b> For a simple application, we can manage all the redux related data(state) in a single reducer. But for complicated projects we can split this into multiple reducers and combine them using combineReducers. You wont be needing this in normal cases. But if you do hear about it somewhere then you can know more about it in the official Docs <a href="https://redux.js.org/api/combinereducers">here</a>.
+        </p>
+        
+        <h2>Updating a Redux State</h2>
+        <p>
+            Now, you know where the state is situated. Next is to learn how to update this state.
+        </p>
+
+        <p>
+            Redux state is updated by calling a function called <b>dispatch</b>. The data to be updated is passed as an object to this dispatch function. Following is a sample dispatch function
+        </p>
+        <pre><code>dispatch({
+    type: "UPDATE_ONBOARDING_DATA",
+    data: { 
+        step: 2,
+        status: true,
+        total: 4,
+    },
+});
+</code></pre>
+    <p>
+        <b>type: </b> is a mandatory attribute. It indicates the type of action performed. It is usually a string.
+    </p>
+    <p>
+        <b>data: </b> if there is any data that we need to pass on to the reducer, that can be added here.
+    </p>
+
+    <p>
+        The reducer is invoked when the dispatch function is called. What happens is pretty straight forward. When the reducer is invoked, it runs a switch statement and fires one which matches the same <b>type</b>. Updates the state with the data if any. 
+    </p>
+    <p>
+        From the above example, all the info in the data key is transfered to the onboarding reducer state as seen below.
+    </p>
+
+    <pre><code>const reducer = (state = initialState, action) => {
+switch (action.type) {
+    case "UPDATE_ONBOARDING_DATA":
+    return {
+        ...state,
+        onboarding: {
+        step: action.data.step,
+        status: action.data.status,
+        total: action.data.total, 
+        },
+    };
+    default:
+    return state;
+}
+</code></pre>
+    
+        <div class="wrap-redux-img">
+            <img src="./assets/images/redux.jpg" alt="">
+        </div>
+
+
+        <p>
+            We can add more states by adding keys like onboarding inside the reducer file. These can be updated by adding other cases inside the switch statement. More dispatch functions in the operations/actions file to update specific parts of the state as you like.
+        </p>
+
+        <h2>Redux Thunk</h2>
+
+        <p>
+            Redux actions are not asynchronous. So we use redux-thunk to make actions asynchronous. Usually called operations. 
+        </p>
+
+    </div><!-- .container -->
+    
+</body>
+
+</html>
