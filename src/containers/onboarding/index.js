@@ -17,147 +17,61 @@ import {setOnboarding} from '../../redux/app/operations';
 
 import colors from '../../assets/styles/colors';
 
-import Slider from '../../components/Slider';
-import StepOne from './screens/StepOne';
-import StepTwo from './screens/StepTwo';
-import StepThree from './screens/StepThree';
+
+import OnboardingType1 from './type1/index';
+
 
 const { width, height } = Dimensions.get('window');
 
 const SLIDE_WIDTH = width;
 
-const StepHeader = () => {
-    const navigation = useNavigation();
-    const dispatch = useDispatch();
-    return (
-        <View style={styles.wrapHeader}>
-            <Pressable style={styles.btnSkip} onPress={() => dispatch(setOnboarding('', false))}>
-                <Text style={styles.btnSkipText}>Skip</Text>
-            </Pressable>
-        </View>
-    );
-}
-const StepFooter = props => {
-    const navigation = useNavigation();
-    const dispatch = useDispatch();
-    const oboardingData = useSelector((state) => state?.app?.onboarding);
-
-    return (
-        <View style={styles.wrapFooter}>
-            <View style={styles.wrapStep}>
-                <Text style={styles.stepText}>
-                    Step {oboardingData.step} of {oboardingData.total}
-            </Text>
-            </View>
-            <Pressable style={styles.btnNext} onPress={() => {
-                
-                (oboardingData.step < oboardingData.total) ? 
-                props.nextSlide(oboardingData.step) : dispatch(setOnboarding(oboardingData.step, false));
-            }}>
-                <Text style={styles.btnNextText}>Next</Text>
-            </Pressable>
-        </View>
-    );
-}
-
-
 const Onboarding = props => {
+    const [type, setType] = useState(null);
     const navigation = useNavigation();
     const SliderRef = useRef(null);
-    
-
     const dispatch = useDispatch();
-    const onboardingItems = [
-        { id: 1, component: <StepOne /> },
-        { id: 2, component: <StepTwo />  },
-        { id: 3, component: <StepThree />  },
-    ]
-
+  
     useEffect(() => {
-        dispatch(setOnboarding(1, true, onboardingItems.length ));
+        // dispatch(setOnboarding(1, true, onboardingItems.length ));
     }, []);
 
-    const renderItem = ({item, index}) => {
-        return (
-            <View style={{ flex: 1, width: SLIDE_WIDTH }} key={index}>
-                {item.component}
-            </View>
-        );
-    }
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            <StepHeader />
-            <View style={styles.wrapContent}>
-                <Slider
-                    ref={SliderRef}
-                    renderItem={renderItem}
-                    data={onboardingItems}
-                    onSlideChange={(slide) => {
-                        const currentSlide = slide + 1;
-                        dispatch(setOnboarding(currentSlide));
-                        // if (slide === (onboardingItems.length - 1) ) {
-                        //     dispatch(setOnboarding(currentSlide));
-                        // } else {
-                        //     dispatch(setOnboarding(currentSlide));
-                        // }
-                    }}
-                    slideWidth={SLIDE_WIDTH}
-                />
-            </View>
-            <StepFooter nextSlide={(index) => SliderRef.current.slideTo(index)}/>
-        </SafeAreaView>
+        <>
+        {!type && <SafeAreaView style={styles.container}>
+            <Pressable style={styles.typeSelector} onPress={() => setType(1)}>
+                <Text style={styles.typeBtnText}>Type 1</Text>
+            </Pressable>
+            <Pressable style={styles.typeSelector} onPress={() => setType(2)}>
+                <Text style={styles.typeBtnText}>Type 2</Text>
+            </Pressable>
+
+        </SafeAreaView>}
+        {type === 1 && <OnboardingType1></OnboardingType1>}
+        </>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#eee',
+        padding: 10,
     },
-    wrapHeader: {
-        height: 40,
-        alignItems: 'flex-end',
-        justifyContent: 'center',
-    },
-    wrapContent: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    wrapFooter: {
+    typeSelector: {
+        width: '100%',
         height: 100,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 16,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        marginBottom: 20,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        padding: 20
     },
-    btnSkip: {
-        flex: 1,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    btnSkipText: {
-        color: colors.primary
-    },
-    btnNext: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        backgroundColor: colors.primary
-    },
-    btnNextText: {
-        color: '#fff'
-    },
-    wrapStep: {
-
-    },
-    stepText: {
-        color: colors.primary
+    typeBtnText: {
+        fontWeight: 'bold',
+        color: colors.pDarkFont
     }
 
 });

@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import images from '../../../assets/images/index';
-import colors from '../../../assets/styles/colors';
+import images from '../../../../assets/images/index';
+import colors from '../../../../assets/styles/colors';
 
 const StepThree = props => {
     const navigation = useNavigation();

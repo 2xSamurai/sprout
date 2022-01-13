@@ -7,17 +7,17 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import images from '../../../assets/images/index';
-import colors from '../../../assets/styles/colors';
+import images from '../../../../assets/images/index';
+import colors from '../../../../assets/styles/colors';
 
-const StepOne = props => {
+const StepTwo = props => {
     const navigation = useNavigation();
     return (
             <View style={styles.wrapStep}>
-                <Image style={styles.stepImage} source={images.girl1}/>
+                <Image style={styles.stepImage} source={images.girl2}/>
                 <View style={styles.wrapContent}>
-                    <Text style={styles.stepTitle}>Step One</Text>
-                    <Text style={styles.stepDescription}>Be yourself; everyone else is already taken.</Text>
+                    <Text style={styles.stepTitle}>Step Two</Text>
+                    <Text style={styles.stepDescription}>Live as if you were to die tomorrow. Learn as if you were to live forever.</Text>
                 </View>
                 
                 {/* Live as if you were to die tomorrow. Learn as if you were to live forever.
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default StepOne;
+export default StepTwo;
